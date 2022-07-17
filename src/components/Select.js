@@ -7,7 +7,7 @@ export function Select({setOption}) {
         <option>Sort the movies:</option>
         <option value="1">Sort by year (desc)</option>
         <option value="2">Sort by year (asc) </option>
-        <option value="3">Sort alphabetically</option>
+        <option value="3">Sort by title (alphabetically)</option>
       </Form.Select>
       </div>
     );
