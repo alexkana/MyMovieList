@@ -1,0 +1,10 @@
+export const getFilteredMovies = (movies,query) => {
+    if (query===""){
+        return movies;
+    }
+    else{
+        return movies.filter(movie => {
+            return movie.name.toLowerCase().search(query) !=-1
+        })
+    }
+}
