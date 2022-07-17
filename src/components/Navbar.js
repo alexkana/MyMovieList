@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom"
 import logo from '../assets/logo.png';
 
 //Navbar of the website
+
 export function Navbar() {
     return (
      <NavBoot className="bg-white mb-3 shadow">
