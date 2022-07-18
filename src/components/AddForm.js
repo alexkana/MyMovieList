@@ -12,12 +12,12 @@ import * as yup from "yup"
 //Validation schema (used yup)
 const schema = yup.object().shape({
   title: yup.string().required("Enter the title").min(2,"Too short").max(100,"Too long"),
-  year: yup.string().required("Enter the year").matches(/^[0-9]+$/, "Enter a valid year").min(1,"Enter a valid year").max(4,"Enter a valid year").test("Year validation","Type a valid year",value=>{
-    return (parseInt(value) >=0 && parseInt(value) <=2022)
+  year: yup.string().required("Enter the year").matches(/^[0-9]+$/, "Enter a valid year").min(4,"Enter a valid year").max(4,"Enter a valid year").test("Year validation","Type a valid year",value=>{
+    return (parseInt(value)>=1850 && parseInt(value) <=2022)
   }),
   genre: yup.string().required("Enter the genre"),
-  rating: yup.string().required("Enter the rating").matches(/^[0-9]+(?:\.[0-9]+)?$/, "Enter a valid rating (0-10)").test("Rating validation","Enter a valid rating",value=>{
-    return (parseFloat(value)>=0 && parseFloat(value) <=10)
+  rating: yup.string().required("Enter the rating").matches(/^[0-9]+(?:\.[0-9]+)?$/, "Enter a valid rating (1-10)").test("Rating validation","Enter a valid rating (1-10)",value=>{
+    return (parseFloat(value)>=1 && parseFloat(value) <=10)
   }),
   imgUrl: yup.string().url("Enter a valid URL")
 });
