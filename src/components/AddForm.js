@@ -7,9 +7,9 @@ import {toast} from "react-toastify"
 import { Formik } from "formik"
 import * as yup from "yup" 
 
-//Form to add/edit a movie
+// Form to add/edit a movie
 
-//Validation schema (used yup)
+// Validation schema (used yup)
 const schema = yup.object().shape({
   title: yup.string().required("Enter the title").min(2,"Too short").max(100,"Too long"),
   year: yup.string().required("Enter the year").matches(/^[0-9]+$/, "Enter a valid year").min(4,"Enter a valid year").max(4,"Enter a valid year").test("Year validation","Type a valid year",value=>{
@@ -21,7 +21,6 @@ const schema = yup.object().shape({
   }),
   imgUrl: yup.string().url("Enter a valid URL")
 });
-
 
 export function AddForm({id}){
 
@@ -48,8 +47,9 @@ useEffect(()=>{
   setLoading(true);
 },[])
 
+// Submits form data 
+// Adds/Updates a movie using post (or put) request
 const submitForm = (movieData) =>{
-  // Adds/Updates a movie using post or put request
   if(movieData.imgUrl==="")
   {
     movieData.imgUrl = "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-800x800.jpg";
@@ -118,7 +118,7 @@ const submitForm = (movieData) =>{
     <div className="d-flex flex justify-content-center align-items-center text-center">
     <Form noValidate className="form rounded" onSubmit={handleSubmit}>
       <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Movie poster URL: (Optional)</Form.Label>
+        <Form.Label>Movie poster URL:Optional</Form.Label>
         <Form.Control value ={values.imgUrl} type="text" name="imgUrl" placeholder="Enter poster URL" onChange={handleChange} isValid={touched.imgUrl && !errors.imgUrl} isInvalid={errors.imgUrl}/>
         <Form.Control.Feedback type="invalid">{errors.imgUrl}</Form.Control.Feedback>
       </Form.Group>
