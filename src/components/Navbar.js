@@ -11,7 +11,7 @@ export function Navbar() {
 
   function changeLocation(placeToGo){
         navigate(placeToGo, { replace: true });
-        window.location.reload();
+       // window.location.reload();
   }
     return (
      <NavBoot className="bg-white mb-3 shadow">
