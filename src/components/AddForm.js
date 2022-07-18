@@ -40,7 +40,6 @@ useEffect(()=>{
     axios.get(`https://movie-list-app-heroku.herokuapp.com/api/movie/${id}`)
     .then((res) =>{
      setMovieInfo(res.data[0]);
-     setMovieId(i)
     })
     .catch(err => toast.error(err.response.data))
   }
@@ -85,7 +84,6 @@ const submitForm = (movieData) =>{
   })
   }
  }
-
   return !loading ? (<div>Loading</div> ): (
     <Formik
       enableReinitialize
@@ -118,7 +116,7 @@ const submitForm = (movieData) =>{
     <div className="d-flex flex justify-content-center align-items-center text-center">
     <Form noValidate className="form rounded" onSubmit={handleSubmit}>
       <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Movie poster URL:Optional</Form.Label>
+        <Form.Label>Movie poster URL: (Optional)</Form.Label>
         <Form.Control value ={values.imgUrl} type="text" name="imgUrl" placeholder="Enter poster URL" onChange={handleChange} isValid={touched.imgUrl && !errors.imgUrl} isInvalid={errors.imgUrl}/>
         <Form.Control.Feedback type="invalid">{errors.imgUrl}</Form.Control.Feedback>
       </Form.Group>
