@@ -41,6 +41,7 @@ useEffect(()=>{
     axios.get(`https://movie-list-app-heroku.herokuapp.com/api/movie/${id}`)
     .then((res) =>{
      setMovieInfo(res.data[0]);
+     setMovieId(i)
     })
     .catch(err => toast.error(err.response.data))
   }
@@ -58,11 +59,11 @@ const submitForm = (movieData) =>{
   if(!id){
   axios.post("https://movie-list-app-heroku.herokuapp.com/api/movie",movieData)
   .then(()=>{
-    setMovieInfo({title:"",
-    year:"",
-    genre:"",
-    rating:"",
-    imgUrl:""});
+   // setMovieInfo({title:"",
+  //  year:"",
+   // genre:"",
+   // rating:"",
+    //imgUrl:""});
     toast.success("Added a movie!")
   })
   .catch(err =>{
@@ -72,11 +73,11 @@ const submitForm = (movieData) =>{
   }else{
     axios.put(`https://movie-list-app-heroku.herokuapp.com/api/movie/${id}`,movieData)
     .then(()=>{
-    setMovieInfo({title:"",
-    year:"",
-    genre:"",
-    rating:"",
-    imgUrl:""});  
+    //setMovieInfo({title:"",
+    //year:"",
+   // genre:"",
+   // rating:"",
+    //imgUrl:""});  
     toast.success("Movie updated!");
   })
   .catch(err =>{
@@ -93,9 +94,13 @@ const submitForm = (movieData) =>{
         console.log(values);
         setSubmitting(true);
         submitForm(values);
-        resetForm();
+        resetForm({title:"",
+        year:"",
+        genre:"",
+        rating:"",
+        imgUrl:""});
         setSubmitting(false); 
-        setTimeout(()=>navigate("/"),800);
+        setTimeout(()=>navigate("/"),1000);
       }}
       initialValues={movieInfo}
       >
@@ -113,7 +118,7 @@ const submitForm = (movieData) =>{
     <div className="d-flex flex justify-content-center align-items-center text-center">
     <Form noValidate className="form rounded" onSubmit={handleSubmit}>
       <Form.Group controlId="formFile" className="mb-3">
-        <Form.Label>Movie poster URL:</Form.Label>
+        <Form.Label>Movie poster URL: (Optional)</Form.Label>
         <Form.Control value ={values.imgUrl} type="text" name="imgUrl" placeholder="Enter poster URL" onChange={handleChange} isValid={touched.imgUrl && !errors.imgUrl} isInvalid={errors.imgUrl}/>
         <Form.Control.Feedback type="invalid">{errors.imgUrl}</Form.Control.Feedback>
       </Form.Group>

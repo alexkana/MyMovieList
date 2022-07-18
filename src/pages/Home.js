@@ -6,40 +6,8 @@ import { useEffect, useState } from "react"
 import axios from 'axios';
 import {toast} from 'react-toastify'
 import {Select} from '../components/Select'
+import {getMoviesBySearch, getSortedMovies} from "../utils/Utils"
 //Homepage of the website
-
-
-//Function that filters the movies based on user's input
-const getFilteredMovies = (movies,query) => {
-    if (query===""){
-        return movies;
-    }
-    else{
-        return movies.filter(movie => {
-            return movie.title.toLowerCase().includes(query)
-        })
-    }
-}
-
-//Function that sorts the movies based on user's selection
-const sortMovies = (movies,value) =>{
-    console.log(value);
-    if (value==="1")
-    {
-       return movies.sort((a,b)=> parseInt(b.year) - parseInt(a.year));
-    }
-    else if(value==="2")
-    {
-       return movies.sort((a,b) => parseInt(a.year) - parseInt(b.year));
-    }
-    else if (value==="3") {
-        return movies.sort((a,b) => a.title.localeCompare(b.title)) ;
-    }
-    else{
-        return movies.sort((a,b) => a.id - b.id);
-    }
-   
-}
 
 //Home component
 export function Home(){
@@ -48,8 +16,8 @@ export function Home(){
     const [option,setOption] = useState("");
     const [moviesList,setMoviesList] = useState([]);
     const [loading,setLoading] = useState(false);
-    const searchedMovies = getFilteredMovies(moviesList,query);
-    const filteredMovies = sortMovies(searchedMovies,option);
+    const searchedMovies = getMoviesBySearch(moviesList,query);
+    const filteredMovies = getSortedMovies(searchedMovies,option);
 
     //Gets movies from the database (get reqeust)
     //Sets movie list
@@ -74,7 +42,7 @@ export function Home(){
         if(window.confirm("Are you sure that you want to delete this movie?")) {
          axios.delete(`https://movie-list-app-heroku.herokuapp.com/api/movie/${movieId}`);
          toast.success("Movie deleted!");
-         setTimeout(()=> loadMovies() , 800);
+         setTimeout(()=> loadMovies() , 1000);
         }
     }
 
