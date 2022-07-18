@@ -1,4 +1,3 @@
-//mport moviesList from "../data/movies.json"
 import {Row,Col} from "react-bootstrap"
 import {MovieItem} from "../components/MovieItem"
 import { SearchBar } from "../components/SearchBar"
@@ -48,7 +47,6 @@ export function Home(){
     const [query,setQuery] = useState("");
     const [option,setOption] = useState("");
     const [moviesList,setMoviesList] = useState([]);
-    const [error,setError] = useState("");
     const [loading,setLoading] = useState(false);
     const searchedMovies = getFilteredMovies(moviesList,query);
     const filteredMovies = sortMovies(searchedMovies,option);
@@ -57,13 +55,13 @@ export function Home(){
     //Sets movie list
     const loadMovies = async ()=>{
         try{
-        const res = await axios.get("https://movie-list-app-heroku.herokuapp.com/api/movie");
-        setMoviesList(res.data);
-        setLoading(true);
+         const res = await axios.get("https://movie-list-app-heroku.herokuapp.com/api/movie");
+         setMoviesList(res.data);
+         setLoading(true);
         }
         catch(err)
         {
-            setError(err);
+           toast.error(err.response.data);
         }
     }
 
@@ -76,7 +74,7 @@ export function Home(){
         if(window.confirm("Are you sure that you want to delete this movie?")) {
          axios.delete(`https://movie-list-app-heroku.herokuapp.com/api/movie/${movieId}`);
          toast.success("Movie deleted!");
-         setTimeout(()=> loadMovies() , 500);
+         setTimeout(()=> loadMovies() , 800);
         }
     }
 

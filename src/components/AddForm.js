@@ -24,6 +24,7 @@ const schema = yup.object().shape({
 
 
 export function AddForm({id}){
+
 const [movieInfo,setMovieInfo] = useState({
    title:"",
    year:"",
@@ -53,6 +54,10 @@ const submitForm = (movieData) =>{
     movieData.imgUrl = "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-800x800.jpg";
   }
 
+  Object.keys(movieData).forEach((key)=>{
+   movieData[key] = movieData[key].trim();
+  })
+
   if(!id){
   axios.post("https://movie-list-app-heroku.herokuapp.com/api/movie",movieData)
   .then(()=>{
@@ -61,13 +66,13 @@ const submitForm = (movieData) =>{
     genre:"",
     rating:"",
     imgUrl:""});
+    toast.success("Added a movie!")
   })
   .catch(err =>{
     toast.error(err.response.data);
   })
-  toast.success("Added a movie!")
-}
-else{
+  
+ }else{
   axios.put(`https://movie-list-app-heroku.herokuapp.com/api/movie/${id}`,movieData)
   .then(()=>{
     setMovieInfo({title:"",
@@ -75,13 +80,13 @@ else{
     genre:"",
     rating:"",
     imgUrl:""});  
+    toast.success("Movie updated!");
   })
   .catch(err =>{
     toast.error(err.response.data);
   })
-  toast.success("Movie updated!")
-}
-}
+  }
+ }
 
   return !loading ? (<div>Loading</div> ): (
     <Formik
@@ -93,7 +98,7 @@ else{
         submitForm(values);
         resetForm();
         setSubmitting(false); 
-        setTimeout(()=>navigate("/"),500);
+        setTimeout(()=>navigate("/"),800);
       }}
       initialValues={movieInfo}
       >

@@ -30,4 +30,3 @@ export function MovieItem({id, title, year, rating, genre, imgUrl, deleteMovie})
     )
 }
 
-//{!id && <Button variant="primary" onClick={()=>handleClick(`/add/${id}`)}>Edit</Button>}
