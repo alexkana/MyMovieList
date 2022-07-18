@@ -53,10 +53,7 @@ const submitForm = (movieData) =>{
   {
     movieData.imgUrl = "https://motivatevalmorgan.com/wp-content/uploads/2016/06/default-movie-800x800.jpg";
   }
-
-  Object.keys(movieData).forEach((key)=>{
-   movieData[key] = movieData[key].trim();
-  })
+  Object.keys(movieData).forEach(key=> movieData[key] = typeof movieData[key] == 'string' ? movieData[key].trim() : movieData[key]);
 
   if(!id){
   axios.post("https://movie-list-app-heroku.herokuapp.com/api/movie",movieData)
@@ -72,9 +69,9 @@ const submitForm = (movieData) =>{
     toast.error(err.response.data);
   })
   
- }else{
-  axios.put(`https://movie-list-app-heroku.herokuapp.com/api/movie/${id}`,movieData)
-  .then(()=>{
+  }else{
+    axios.put(`https://movie-list-app-heroku.herokuapp.com/api/movie/${id}`,movieData)
+    .then(()=>{
     setMovieInfo({title:"",
     year:"",
     genre:"",
@@ -94,7 +91,7 @@ const submitForm = (movieData) =>{
       validationSchema={schema}
       onSubmit={(values,{resetForm,setSubmitting}) => {
         console.log(values);
-        setSubmitting(true)
+        setSubmitting(true);
         submitForm(values);
         resetForm();
         setSubmitting(false); 
