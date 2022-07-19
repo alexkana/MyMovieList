@@ -1,7 +1,6 @@
 import {Row,Col} from "react-bootstrap"
 import {MovieItem} from "../components/MovieItem"
 import { SearchBar } from "../components/SearchBar"
-//import {getFilteredMovies} from "../utilities/getFilteredMovies"
 import { useEffect, useState } from "react"
 import axios from 'axios';
 import {toast} from 'react-toastify'
@@ -41,7 +40,7 @@ export function Home(){
     const deleteMovie = (movieId) =>{
         if(window.confirm("Are you sure that you want to delete this movie?")) {
          axios.delete(`https://movie-list-app-heroku.herokuapp.com/api/movie/${movieId}`);
-         toast.success("Movie deleted!");
+         toast.success("Movie deleted successfully!");
          setTimeout(()=> loadMovies() , 1000);
         }
     }
@@ -65,7 +64,7 @@ export function Home(){
             <MovieItem {...movie} deleteMovie={deleteMovie}/>
         </Col>
     ))}
-    {loading && filteredMovies.length===0 && <h2>No results.</h2> }
+    {loading && filteredMovies.length===0 && <h2>No results found.</h2> }
     {loading && moviesList.length===0 && <h2>Add a movie in your list.</h2> }
     </Row>
     </>

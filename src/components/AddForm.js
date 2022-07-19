@@ -77,7 +77,7 @@ const submitForm = (movieData) =>{
    // genre:"",
    // rating:"",
     //imgUrl:""});  
-    toast.success("Movie updated!");
+    toast.success("Movie updated successfully!");
   })
   .catch(err =>{
     toast.error(err.response.data);
