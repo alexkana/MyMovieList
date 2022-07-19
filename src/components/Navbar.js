@@ -7,8 +7,6 @@ import logo from '../assets/logo.png';
 
 export function Navbar() {
 
-  let navigate = useNavigate();
-
     return (
      <NavBoot className="bg-white mb-3 shadow">
         <Container>
