@@ -5,6 +5,7 @@ import logo from '../assets/logo.png';
 //Navbar of the website
 
 export function Navbar() {
+  const navigate = useNavigate();
 
   function changeLocation(placeToGo){
     navigate(placeToGo, { replace: true });
