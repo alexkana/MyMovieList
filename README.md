@@ -5,8 +5,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # My Movie List
 My Movie List is a full stack web app where users can add and manage their favorite movies.
 
-You can use it here: https://my-movie-list-app.netlify.app
-
 # Frontend  
 Stack: React.js, Bootstrap
 
